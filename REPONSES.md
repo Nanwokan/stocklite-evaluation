@@ -4,7 +4,6 @@
 Q01: <réponse>
 commande: <commande(s) utilisée(s)>
 -->
-
 Q01: 32
 commande: git rev-list --count depart
 
