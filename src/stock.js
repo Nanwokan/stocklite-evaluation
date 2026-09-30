@@ -29,8 +29,8 @@ export class Stock {
   alertes({ seulementCritiques = false } = {}) {
     return this.lister()
       .filter((p) => p.quantite < p.seuil)
-        .sort((a, b) => a.quantite - b.quantite)
-        .map((p) => ({ ...p, critique: p.quantite === 0 }))
+      .sort((a, b) => a.quantite - b.quantite)
+      .map((p) => ({ ...p, critique: p.quantite === 0 }))
       .filter((p) => !seulementCritiques || p.critique);
   }
 
