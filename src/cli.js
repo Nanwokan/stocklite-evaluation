@@ -3,6 +3,8 @@ import { formaterTableau } from './format.js';
 import { chargerExemple } from './outils.js';
 import { versCsv } from './export.js';
 
+console.log("Bienvenue dans StockLite !");
+
 const stock = chargerExemple(new Stock());
 const commande = process.argv[2] ?? 'lister';
 
@@ -13,6 +15,7 @@ switch (commande) {
 
   case 'alertes':
     console.log(formaterTableau(stock.alertes()) || 'Aucune alerte');
+    break
   case 'export':
     console.log(versCsv(stock));
     break;

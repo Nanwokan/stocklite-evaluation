@@ -31,29 +31,24 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [22, 24]
-  build:
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm ci
-      - run: npm test
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: https://npm.pkg.github.com/
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
       - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Lancer les tests et enregistrer le rapport
+        run: npm test 2>&1 | tee test-results.txt
+        shell: bash
+
+      - name: Publier le rapport des tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultats-tests-node-${{ matrix.node-version }}
+          path: test-results.txt
+          if-no-files-found: ignore
