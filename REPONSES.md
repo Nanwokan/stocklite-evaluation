@@ -26,6 +26,12 @@ commande: git rev-list --count v0.2.0..v1.0.0
 Q07: essai-perf
 commande: git tag -l --format="%(refname:short) %(objecttype)"
 
+
+Q08: /experiment/cache-redis
+commande: git branch -r --no-merged main, git merge-base origin/experiment/cache-redis v1.0.0, git show --oneline --decorate 6547cc58050bd6455d7d025a440e3bca05babe49
+
+
+
 Q08: /experiment/cache-redis
 commande: git branch -r --no-merged main, git merge-base origin/experiment/cache-redis v1.0.0, git show --oneline --decorate 6547cc58050bd6455d7d025a440e3bca05babe49
 
@@ -47,5 +53,5 @@ commande: git log --oneline --grep="Merge" --no-abbrev
 Q14: En se referrant a la première colonne de git diff --numstat, le nombre lignes ayant été ajoutées à src/stock.js entre v0.1.0 et v1.0.0 est 16.
 commande: git diff --numstat v0.1.0 v1.0.0 -- src/stock.js
 
-Q15: 
-commande: 
+Q15: 6d6b9207651255c22dd0f084b0cf793faed17f31
+commande: git log --all -S"TODO: gérer les quantités négatives" --oneline, git show 6d6b920
