@@ -48,5 +48,5 @@ commande:
 Q14: 
 commande: 
 
-Q15: 
-commande: 
+Q15: 6d6b9207651255c22dd0f084b0cf793faed17f31
+commande: git log --all -S"TODO: gérer les quantités négatives" --oneline, git show 6d6b920

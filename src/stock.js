@@ -30,6 +30,7 @@ export class Stock {
     return this.lister()
       .filter((p) => p.quantite < p.seuil)
       .sort((a, b) => a.quantite - b.quantite);
+      .map((p) => ({ ...p, critique: p.quantite === 0 }));
   }
 
   // Valeur totale du stock selon une table de prix { ref: prix }
