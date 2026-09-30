@@ -1,0 +1,54 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
+
+on:
+  push:
+    branches: [main]
+  pull_request: 
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+  
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lancer les tests et enregistrer le rapport
+        run: npm test 2>&1 | tee test-results.txt
+        shell: bash
+
+      - name: Publier le rapport des tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultats-tests-node-${{ matrix.node-version }}
+          path: test-results.txt
+          if-no-files-found: ignore
