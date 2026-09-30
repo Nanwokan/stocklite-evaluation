@@ -5,11 +5,12 @@ Q01: <réponse>
 commande: <commande(s) utilisée(s)>
 -->
 
-Q01: 
-commande: 
+Q01: 32
+commande: git rev-list --count depart
 
-Q02: 
-commande: 
+
+Q02: Sarah Benali
+commande: >git blame -L 7 src/format.js
 
 Q03: 
 commande: 
