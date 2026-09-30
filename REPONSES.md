@@ -27,26 +27,32 @@ commande: git rev-list --count v0.2.0..v1.0.0
 Q07: essai-perf
 commande: git tag -l --format="%(refname:short) %(objecttype)"
 
+
 Q08: /experiment/cache-redis
 commande: git branch -r --no-merged main, git merge-base origin/experiment/cache-redis v1.0.0, git show --oneline --decorate 6547cc58050bd6455d7d025a440e3bca05babe49
 
-Q09: 
-commande: 
 
-Q10: 
-commande: 
 
-Q11: 
-commande: 
+Q08: /experiment/cache-redis
+commande: git branch -r --no-merged main, git merge-base origin/experiment/cache-redis v1.0.0, git show --oneline --decorate 6547cc58050bd6455d7d025a440e3bca05babe49
 
-Q12: 
-commande: 
+Q09: Le chemin d'origine du fichier src/outils.js etait src/utils.js
+commande: git log --follow --name-only -- src/outils.js
 
-Q13: 
-commande: 
+Q10: L'auteur a le plus de commits dans l'historique accessible depuis depart est Nathan Robin.
+commande: git shortlog -sn || git log depart --pretty="%an" | sort
 
-Q14: 
-commande: 
+Q11: le commit pointé par v1.0.0 a été créé le 2026-03-24.
+commande: git log -1 --format="%ad" --date=short v1.0.0
+
+Q12: la première ligne de son message est "feat(cli): bannière de démarrage".
+commande: git log --grep="Revert"
+
+Q13: le SHA du commit de fusion qui a intégré la branche fix/valeur-totale est de5637a7c2ec4e7458525081fd1d1e9b237f0708.
+commande: git log --oneline --grep="Merge" --no-abbrev
+
+Q14: En se referrant a la première colonne de git diff --numstat, le nombre lignes ayant été ajoutées à src/stock.js entre v0.1.0 et v1.0.0 est 16.
+commande: git diff --numstat v0.1.0 v1.0.0 -- src/stock.js
 
 Q15: 6d6b9207651255c22dd0f084b0cf793faed17f31
 commande: git log --all -S"TODO: gérer les quantités négatives" --oneline, git show 6d6b920
